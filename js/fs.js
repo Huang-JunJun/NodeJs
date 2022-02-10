@@ -23,3 +23,14 @@ try {
   console.log(error);
   console.log('读取失败');
 }
+
+// 往文件中写入内容
+// 新内容会覆盖旧内容
+// 如果路径不对的话会创建新文件
+fs.writeFile('./test.txt', '这是新写入的内容', function(err) {
+  if (err) {
+    console.log('写入文件失败');
+  } else {
+    console.log('写入文件成功');
+  }
+})
