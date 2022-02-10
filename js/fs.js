@@ -13,3 +13,13 @@ fs.readFile('./test.txt', 'utf-8', function(err, data) {
     console.log(data);
   }
 })
+
+// 同步
+try {
+  const result = fs.readFileSync('./test.txt', 'utf-8')
+  console.log('读取成功');
+  console.log(result);
+} catch (error) {
+  console.log(error);
+  console.log('读取失败');
+}
