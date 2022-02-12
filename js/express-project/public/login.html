@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>用户登录</h1>
+    <input type="text" id="username">
+    <input type="text" id="password">
+    <button id="loginBtn">登录</button>
+
+    <script src="./js/jquery.min.js"></script>
+
+    <script>
+        $('#loginBtn').click(function () {
+            const username = $('#username').val()
+            const password = $('#password').val()
+
+            $.ajax({
+                url: '/users/login',
+                data: {
+                    username: username,
+                    password: password
+                },
+                type: 'post',
+                success: function (msg) {
+                    console.log(msg);
+                }
+            })
+        })
+    </script>
+</body>
+</html>
