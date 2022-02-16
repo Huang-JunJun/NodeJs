@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>用户注册</h1>
+    <div>
+        用户名:<input type="text" id="username">
+        密码:<input type="text" id="password">
+    </div>
+    <div>
+        姓名:<input type="text" id="name">
+    </div>
+    <div>
+        年龄:<input type="text" id="age">
+    </div>
+    <div>
+        <label><input name="man" type="radio" value="1" />男</label> 
+        <label><input name="woman" type="radio" value="0" />女</label> 
+    </div>
+    <div style="margin-top: 20px;">
+        <button id="registerBtn">注册</button>
+    </div>
+
+    <script src="./js/jquery.min.js"></script>
+
+    <script>
+        $('#registerBtn').click(function () {
+            const username = $('#username').val()
+            const password = $('#password').val()
+
+            $.ajax({
+                url: '/users/login',
+                data: {
+                    username: username,
+                    password: password
+                },
+                type: 'post',
+                success: function (msg) {
+                    console.log(msg);
+                }
+            })
+        })
+    </script>
+</body>
+</html>
