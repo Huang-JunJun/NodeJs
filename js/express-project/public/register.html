@@ -19,8 +19,8 @@
         年龄:<input type="text" id="age">
     </div>
     <div>
-        <label><input name="man" type="radio" value="1" />男</label> 
-        <label><input name="woman" type="radio" value="0" />女</label> 
+        <label><input name="gender" type="radio" value="1" />男</label> 
+        <label><input name="gender" type="radio" value="0" />女</label> 
     </div>
     <div style="margin-top: 20px;">
         <button id="registerBtn">注册</button>
@@ -32,16 +32,22 @@
         $('#registerBtn').click(function () {
             const username = $('#username').val()
             const password = $('#password').val()
+            const name = $('#name').val()
+            const age = $('#age').val()
+            const gender = $('input[type="radio"]:checked').val()
 
             $.ajax({
-                url: '/users/login',
+                url: '/users/register',
                 data: {
                     username: username,
-                    password: password
+                    password: password,
+                    name: name,
+                    age: age,
+                    gender: gender
                 },
                 type: 'post',
-                success: function (msg) {
-                    console.log(msg);
+                success: function (res) {
+                    console.log(r);
                 }
             })
         })

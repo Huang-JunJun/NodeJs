@@ -12,7 +12,7 @@
     <input type="text" id="password">
     <div style="margin-top: 20px;">
         <button id="loginBtn">登录</button>
-        <button id="loginBtn">注册</button>
+        <button id="registerBtn">注册</button>
     </div>
 
     <script src="./js/jquery.min.js"></script>
@@ -29,10 +29,15 @@
                     password: password
                 },
                 type: 'post',
-                success: function (msg) {
-                    console.log(msg);
+                success: function (res) {
+                    if (res.status === 200) {
+                        window.location.href = '/'
+                    }
                 }
             })
+        })
+        $('#registerBtn').click(function () {
+            window.location.href = '/register.html'
         })
     </script>
 </body>

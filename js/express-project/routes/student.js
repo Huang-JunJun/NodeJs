@@ -1,29 +1,25 @@
 var express = require('express');
 var router = express.Router();
 
-let students = [
-  {
-    id: 1,
-    name: '张三',
-    age: 20,
-    gender: '男'
-  },
-  {
-    id: 2,
-    name: '李四',
-    age: 20,
-    gender: '男'
-  },
-  {
-    id: 3,
-    name: '王五',
-    age: 20,
-    gender: '男'
-  }
-]
+const { Schema, model } = require('mongoose')
+const studentSchema = new Schema({
+  name: String,
+  age: Number,
+  gender: String
+})
+const studentModel = model('studentModel', studentSchema, 'students')
 
 /* GET home page. */
-router.get('/getStudents', function(req, res, next) {
+router.get('/getStudents', async function(req, res, next) {
+  const result = await studentModel.find({})
+  const students = result.map(item => {
+    return {
+      id: item._id,
+      name: item.name,
+      age: item.age,
+      gender: item.gender
+    }
+  })
   res.send({
     msg: '学生数据获取成功!',
     status: 200,
@@ -31,16 +27,15 @@ router.get('/getStudents', function(req, res, next) {
   });
 });
 
-router.delete('/delStudents', function(req, res, next) {
-  students = students.filter(item => {
-    return item.id !== parseInt(req.body.id)
-  })
-  
-  res.send({
-    msg: '删除成功!',
-    status: 1,
-    data: students
-  });
+router.delete('/delStudents', async function(req, res, next) {
+  const id = req.body.id
+  const result = await studentModel.remove({ _id: id })
+  if (result) {
+    res.send({
+      msg: '删除成功!',
+      status: 1
+    });
+  }
 });
 
 module.exports = router;
